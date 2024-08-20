@@ -1,0 +1,14 @@
+{
+  "name": "cypress-with-cucumber",
+  "version": "1.0.0",
+  "description": "Cypress Cucumber Automation Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rebeca",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.13.3"
+  }
+}
