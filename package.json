@@ -1,0 +1,14 @@
+{
+  "name": "cypress-express",
+  "version": "1.0.0",
+  "description": "Project tests e2e Mark L",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rebeca Camilo",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.2.0"
+  }
+}
