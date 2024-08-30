@@ -17,5 +17,7 @@ describe("tasks", () => {
 
     //xpath: '//button[contains(text(), "Create")]'
     cy.contains("button", "Create").click();
+
+    cy.contains('main p', taskDescription).should('be.visible');
   });
 });
