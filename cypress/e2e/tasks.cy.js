@@ -19,14 +19,8 @@ describe("tasks", () => {
 
     cy.removeTaskByDescription(task.name);
 
-    cy.request({
-      url: "http://localhost:3333/tasks/",
-      method: "POST",
-      body: task,
-    }).then(response => {
-      expect(response.status).to.eq(201);
-    });
-    
+    cy.postTask(task);
+
     cy.createTask(task.name);
 
     cy.get('.swal2-html-container')
@@ -52,4 +46,14 @@ Cypress.Commands.add('removeTaskByDescription', (taskDescription, status) => {
   }).then((response) => {
     expect(response.status).to.eq(204);
   });
+});
+
+Cypress.Commands.add('postTask', (task) => {
+  cy.request({
+      url: "http://localhost:3333/tasks/",
+      method: "POST",
+      body: task,
+    }).then(response => {
+      expect(response.status).to.eq(201);
+    });
 });
