@@ -4,13 +4,7 @@ describe("tasks", () => {
   it("deve cadastrar uma nova tarefa", () => {
     const taskDescription = "Walk the dog";
 
-    cy.request({
-      url: "http://localhost:3333/helper/tasks/",
-      method: "DELETE",
-      body: { name: taskDescription },
-    }).then((response) => {
-      expect(response.status).to.eq(204);
-    });
+    cy.removeTaskByDescription(taskDescription);
 
     cy.createTask(taskDescription);
 
@@ -23,13 +17,7 @@ describe("tasks", () => {
       is_done: false
     };
 
-    cy.request({
-      url: "http://localhost:3333/helper/tasks/",
-      method: "DELETE",
-      body: { name: task.name },
-    }).then((response) => {
-      expect(response.status).to.eq(204);
-    });''
+    cy.removeTaskByDescription(task.name);
 
     cy.request({
       url: "http://localhost:3333/tasks/",
@@ -54,4 +42,14 @@ Cypress.Commands.add('createTask', (taskDescription) => {
 
     //xpath: '//button[contains(text(), "Create")]'
     cy.contains("button", "Create").click();
-})
+});
+
+Cypress.Commands.add('removeTaskByDescription', (taskDescription, status) => {
+  cy.request({
+    url: "http://localhost:3333/helper/tasks/",
+    method: "DELETE",
+    body: { name: taskDescription },
+  }).then((response) => {
+    expect(response.status).to.eq(204);
+  });
+});
