@@ -12,12 +12,7 @@ describe("tasks", () => {
       expect(response.status).to.eq(204);
     });
 
-    cy.visit("http://localhost:3000");
-
-    cy.get('input[placeholder="Add a new Task"]').type(taskDescription);
-
-    //xpath: '//button[contains(text(), "Create")]'
-    cy.contains("button", "Create").click();
+    cy.createTask(taskDescription);
 
     cy.contains('main p', taskDescription).should('be.visible');
   });
@@ -43,17 +38,20 @@ describe("tasks", () => {
     }).then(response => {
       expect(response.status).to.eq(201);
     });
-
-    cy.visit("http://localhost:3000");
-
-    // cy.get('input[placeholder="Add a new Task"]').type(taskDescription);    
-    // cy.contains("button", "Create").click();
-
-    cy.get('input[placeholder="Add a new Task"]').type(task.name);    
-    cy.contains("button", "Create").click();
+    
+    cy.createTask(task.name);
 
     cy.get('.swal2-html-container')
       .should('be.visible')
       .should('have.text', 'Task already exists!');
   });
 });
+
+Cypress.Commands.add('createTask', (taskDescription) => {
+  cy.visit("http://localhost:3000");
+
+    cy.get('input[placeholder="Add a new Task"]').type(taskDescription);
+
+    //xpath: '//button[contains(text(), "Create")]'
+    cy.contains("button", "Create").click();
+})
