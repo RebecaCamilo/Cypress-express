@@ -28,9 +28,11 @@ describe("tasks", () => {
       .should('have.text', 'Task already exists!');
   });
 
-  it.only("não deve permitir tarefa vazia", () => {
+  it("não deve permitir tarefa vazia", () => {
     
     cy.createTask();
+
+    cy.isRequired('This is a required field');    
 
   });
 

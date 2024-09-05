@@ -28,15 +28,29 @@
 Cypress.Commands.add('createTask', (taskDescription = '') => {
     cy.visit("http://localhost:3000");
 
+    cy.get('input[placeholder="Add a new Task"]').as('inputTask');
+
     if(taskDescription !== '') {
-      cy.get('input[placeholder="Add a new Task"]').type(taskDescription);
+      cy.get('@inputTask').type(taskDescription);
     }
 
       //xpath: '//button[contains(text(), "Create")]'
       cy.contains("button", "Create").click();
   });
+
+  Cypress.Commands.add('isRequired', (targetMessage) => {
+
+    cy.get('@inputTask')
+      .invoke('prop', 'validationMessage')
+      .should((text) => {
+        expect(
+          targetMessage
+        ).to.eq(text);
+      })
+
+  });
   
-  Cypress.Commands.add('removeTaskByDescription', (taskDescription, status) => {
+  Cypress.Commands.add('removeTaskByDescription', (taskDescription) => {
     cy.request({
       url: "http://localhost:3333/helper/tasks/",
       method: "DELETE",
