@@ -25,11 +25,13 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add('createTask', (taskDescription) => {
+Cypress.Commands.add('createTask', (taskDescription = '') => {
     cy.visit("http://localhost:3000");
-  
+
+    if(taskDescription !== '') {
       cy.get('input[placeholder="Add a new Task"]').type(taskDescription);
-  
+    }
+
       //xpath: '//button[contains(text(), "Create")]'
       cy.contains("button", "Create").click();
   });

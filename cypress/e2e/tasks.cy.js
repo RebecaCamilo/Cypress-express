@@ -27,4 +27,11 @@ describe("tasks", () => {
       .should('be.visible')
       .should('have.text', 'Task already exists!');
   });
+
+  it.only("não deve permitir tarefa vazia", () => {
+    
+    cy.createTask();
+
+  });
+
 });
