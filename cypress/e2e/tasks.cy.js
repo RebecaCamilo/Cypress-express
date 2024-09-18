@@ -36,10 +36,11 @@ describe("tasks", () => {
   context("atualização", () => {
     it("deve marcar tarefa como concluída", () => {
       const task = {
-        name: 'Estudar automação', 
+        name: 'teste', 
         is_done: false
       };
 
+      cy.visit("http://localhost:3000");
       
       cy.contains('p', task.name)
         .parent()
