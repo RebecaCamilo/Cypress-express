@@ -36,9 +36,12 @@ describe("tasks", () => {
   context("atualização", () => {
     it("deve marcar tarefa como concluída", () => {
       const task = {
-        name: 'teste', 
+        name: 'estudar automação', 
         is_done: false
       };
+
+      cy.removeTaskByDescription(task.name);
+      cy.postTask(task);
 
       cy.visit("http://localhost:3000");
       
@@ -46,6 +49,9 @@ describe("tasks", () => {
         .parent()
         .find('button[class*=ItemToggle]')
         .click();
+      
+      cy.contains('p', task.name)
+        .should('have.css', 'text-decoration-line', 'line-through');
     })
   })
 });
