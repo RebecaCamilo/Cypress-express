@@ -27,10 +27,24 @@ describe("tasks", () => {
         .should('have.text', 'Task already exists!');
     });
   
-    it("não deve permitir tarefa vazia", () => {
-      
+    it("não deve permitir tarefa vazia", () => {      
       cy.createTask();
       cy.isRequired('This is a required field');
     });
+  })
+
+  context("atualização", () => {
+    it("deve marcar tarefa como concluída", () => {
+      const task = {
+        name: 'Estudar automação', 
+        is_done: false
+      };
+
+      
+      cy.contains('p', task.name)
+        .parent()
+        .find('button[class*=ItemToggle]')
+        .click();
+    })
   })
 });
