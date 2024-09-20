@@ -56,7 +56,7 @@ describe("tasks", () => {
   })
 
   context("exclusão", () => {
-    it.only("deve remover uma tarefa", () => {
+    it("deve remover uma tarefa", () => {
       const task = {
         name: 'Estudar javascript', 
         is_done: false
