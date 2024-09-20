@@ -54,4 +54,26 @@ describe("tasks", () => {
         .should('have.css', 'text-decoration-line', 'line-through');
     })
   })
+
+  context("exclusão", () => {
+    it.only("deve remover uma tarefa", () => {
+      const task = {
+        name: 'Estudar javascript', 
+        is_done: false
+      };
+
+      cy.removeTaskByDescription(task.name);
+      cy.postTask(task);
+
+      cy.visit("http://localhost:3000");
+      
+      cy.contains('p', task.name)
+        .parent()
+        .find('button[class*=ItemDelete]')
+        .click();
+      
+      cy.contains('p', task.name)
+        .should('not.exist');
+    })
+  })
 });
