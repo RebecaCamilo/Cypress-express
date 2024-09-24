@@ -26,7 +26,7 @@
 
 
 Cypress.Commands.add('createTask', (taskDescription = '') => {
-    cy.visit("http://localhost:3000");
+    cy.visit("/");
 
     cy.get('input[placeholder="Add a new Task"]').as('inputTask');
 

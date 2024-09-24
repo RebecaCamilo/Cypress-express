@@ -43,7 +43,7 @@ describe("tasks", () => {
       cy.removeTaskByDescription(task.name);
       cy.postTask(task);
 
-      cy.visit("http://localhost:3000");
+      cy.visit("/");
       
       cy.contains('p', task.name)
         .parent()
@@ -61,11 +61,11 @@ describe("tasks", () => {
         name: 'Estudar javascript', 
         is_done: false
       };
-
+      
       cy.removeTaskByDescription(task.name);
       cy.postTask(task);
 
-      cy.visit("http://localhost:3000");
+      cy.visit("/");
       
       cy.contains('p', task.name)
         .parent()
