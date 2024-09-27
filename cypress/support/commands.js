@@ -52,7 +52,7 @@ Cypress.Commands.add('createTask', (taskDescription = '') => {
   
   Cypress.Commands.add('removeTaskByDescription', (taskDescription) => {
     cy.request({
-      url: "http://localhost:3333/helper/tasks/",
+      url: Cypress.env("apiUrl") + "/helper/tasks/",
       method: "DELETE",
       body: { name: taskDescription },
     }).then((response) => {
@@ -62,7 +62,7 @@ Cypress.Commands.add('createTask', (taskDescription = '') => {
   
   Cypress.Commands.add('postTask', (task) => {
     cy.request({
-        url: "http://localhost:3333/tasks/",
+        url: Cypress.env("apiUrl") + "/tasks/",
         method: "POST",
         body: task,
       }).then(response => {
