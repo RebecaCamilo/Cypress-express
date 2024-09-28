@@ -1,6 +1,15 @@
 /// <reference types="cypress" />
 
 describe("tasks", () => {
+
+  let testData;
+
+  before(() => {
+    cy.fixture('tasks').then(t => {
+      testData = t;
+    })
+  })
+
   context('cadastro', () => {
     it("deve cadastrar uma nova tarefa", () => {
       const taskDescription = "Walk the dog";
@@ -13,10 +22,7 @@ describe("tasks", () => {
     });
   
     it("não deve permitir tarefa duplicada", () => {
-      const task = {
-        name: 'Estudar inglês', 
-        is_done: false
-      };
+      const task = testData.dup
   
       cy.removeTaskByDescription(task.name);
       cy.postTask(task);
